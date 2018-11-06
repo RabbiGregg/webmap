@@ -3,15 +3,15 @@
 #Dataset used: pretoria_attractions.geojson
 
 # Setup on local machine:
- Download and Install MAMP/XAMP Server - https://www.mamp.info/en/
- Clone project into the htdocs folder in the MAMP/XAMP directory
- Start MAMP server.
- Visit localhost:[REPlACE WITH PORT NUMBER] in your browser.
+ - Download and Install MAMP/XAMP Server - https://www.mamp.info/en/
+ - Clone project into the htdocs folder in the MAMP/XAMP directory
+ - Start MAMP server.
+ - Visit localhost:[REPlACE WITH PORT NUMBER] in your browser.
 
 # DB Setup:
- Download and Install PostgreSQL - https://www.pgadmin.org/download/
- Download and Install QGis - https://www.qgis.org/en/site/ 
- Download and Install PgAdmin - https://www.pgadmin.org/download/
+ -Download and Install PostgreSQL - https://www.pgadmin.org/download/
+ -Download and Install QGis - https://www.qgis.org/en/site/ 
+ -Download and Install PgAdmin - https://www.pgadmin.org/download/
 
  - Step 1: Launch PostreSQL and click initialize to start database server.
  - Step 2: Launch PgAdmin, right click Servers and create a new Server named PostgreSQL.
