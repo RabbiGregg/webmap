@@ -6,7 +6,7 @@
  - Download and Install MAMP/XAMP Server - https://www.mamp.info/en/
  - Clone project into the htdocs folder in the MAMP/XAMP directory
  - Start MAMP server.
- - Visit localhost:[REPlACE WITH PORT NUMBER] in your browser.
+ - Visit localhost:[REPLACE WITH PORT NUMBER] in your browser.
 
 # DB Setup:
  -Download and Install PostgreSQL - https://www.pgadmin.org/download/
