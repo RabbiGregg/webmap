@@ -60,17 +60,32 @@
             <h1 class="text-center">Attractions</h1>
             <select id='filter' class='form-control'>
                 <option value='All'>All Attractions</option>
-                <option value="Park">Park</option>
-                <option value="Museum">Museum</option>
-                <option value="Place">Place</option>
-                <option value="Government">Government</option>
-                <option value="Monument">Monument</option>
+                <option value='Park'>Park</option>
+                <option value='Museum'>Museum</option>
+                <option value='Place'>Place</option>
+                <option value='Neighborhood'>Neighborhood</option>
+                <option value='Pueblo Magico'>Pueblo Magico</option>
             </select>
             <div id="zoomButtons"></div>
+            <button id="btnBuffer" class="form-control">Add Buffer</button>
+            <div id="legend">
+                <h4 class="text-center">
+                    Linear Objects
+                </h4>
+                <svg height="270" width="100%">
+                    <line x1="10" y1="10" x2="40" y2="10" style="stroke:peru; stroke-width: 2;"/>
+                    <text x="50" y="15" style="font-family:sans-serif; font-size:16px;">Pipeline</text>
+                    <line x1="10" y1="40" x2="40" y2="40" style="stroke:navy; stroke-width: 2;"/>
+                    <text x="50" y="45" style="font-family:sans-serif; font-size:16px;">Flowline</text>
+                    <line x1="10" y1="70" x2="40" y2="70" style="stroke:navy; stroke-width: 2;stroke-dasharray: 5,5 "/>
+                    <text x="50" y="75" style="font-family:sans-serif; font-size:16px;">Flowline - Estimated</text>
+                </svg>
+
+            </div>
          </div>
         <div id="mapdiv" class="col-md-9"></div>
         <div id="footer" class="col-md-12">
-            <h4 id="map_coords" class="text-center">Latitude: 19.4 Longitude: -99.1 Zoom Level: 11</h4>
+            <h4 id="map_coords" class="text-center">Latitude: 19.4 Longitude: -99.1 Zoom Level: 17</h4>
             
         </div>
         
@@ -96,11 +111,11 @@
                     <div class="form-group row">
                           <div class="col-sm-6">
                                 <select id="category" class="form-control">
-                                    <option value="Park">Park</option>
-                                    <option value="Museum">Museum</option>
-                                    <option value="Place">Place</option>
-                                    <option value="Government">Government</option>
-                                    <option value="Monument">Monument</option>
+                                    <option value='Park'>Park</option>
+                                    <option value='Museum'>Museum</option>
+                                    <option value='Place'>Place</option>
+                                    <option value='Neighborhood'>Neighborhood</option>
+                                    <option value='Pueblo Magico'>Pueblo Magico</option>
                                 </select>
                           </div>
                           <div class="col-sm-6">
@@ -131,12 +146,13 @@
         
         <script>
             var mymap = L.map('mapdiv')
-            mymap.setView([-25.731340, 28.218370], 11);
+            mymap.setView([-25.731340, 28.218370], 17);
             
             var backgroundLayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png');
             mymap.addLayer(backgroundLayer);
 
             var lyrAttractions;
+            
             refreshAttractions();
 
             mymap.on('mousemove', function(e){
@@ -144,14 +160,14 @@
                 $("#map_coords").html(str);
             });
             $("#btnBuffer").click(function(){
-        if ($("#btnBuffer").html()=='Buffer') {
-          var bufferedAttractions = turf.buffer(geojsonLayer.toGeoJSON(), 5, 'kilometers');
-          bufferLayer = L.geoJSON(bufferedAttractions).addTo(mymap);
+        if ($("#btnBuffer").html()=='Add Buffer') {
+          var bufferedAttractions = turf.buffer(lyrAttractions.toGeoJSON(), 1, 'kilometers');
+          bufferLayer = L.geoJSON(bufferedAttractions, {style:{color:'yellow',dashArray:'5,5', fillOpacity:0}}).addTo(mymap);
+          bufferLayer.bringToFront();
           $("#btnBuffer").html("Remove Buffer");
-
         } else {
           mymap.removeLayer(bufferLayer);
-          $("#btnBuffer").html("Buffer");
+          $("#btnBuffer").html("Add Buffer");
         }
         });
             
@@ -283,6 +299,8 @@
                         }});
                         lyrAttractions.addTo(mymap);
                         mymap.fitBounds(lyrAttractions.getBounds());
+
+                        
                 }});
             }
             
