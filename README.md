@@ -1,4 +1,4 @@
-# GIS Developer Recruitment Exercise
+
 
 #Dataset used: pretoria_attractions.geojson
 
